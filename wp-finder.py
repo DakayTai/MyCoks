@@ -72,9 +72,8 @@ class EvaiLCode:
                 check = response.content.decode('utf-8')
                 if 'Uname:' in check or '-rw-r--r--' in check or '#block-css#' in check:
                     print(f'[SUCCESS] {url} --> {fg}[shell found]')
-                    with open('shell-finder.txt', 'a') as file:
+                    with open('shell.txt', 'a') as file:
                         file.write(url + Path + "\n")
-                    print("Save shell-finder.txt")
                     break
                 else:
                     print(f'[FAIL] {url} --> {fr}[shell not found]')
