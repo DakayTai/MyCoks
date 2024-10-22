@@ -19,7 +19,7 @@ print(banner)
 requests.urllib3.disable_warnings()
 
 # Prompt user for file containing the target sites
-file_path = input= ("List Website # ")
+file_path = input("List Website # ")
 
 # Read target sites from the specified file
 try:
