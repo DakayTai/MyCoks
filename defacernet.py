@@ -49,4 +49,4 @@ for page in range(first_page, last_page+1):
     with open('defacernet.txt', 'w') as file:
         for url in urls:
             file.write(url + '\n')
-            print("Save In defacernet.txt")
+print("Save In defacernet.txt")
