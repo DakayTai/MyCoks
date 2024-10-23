@@ -1,5 +1,5 @@
 import socket
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed  # Ensure this is imported
 
 def get_ip_from_domain(domain):
     try:
