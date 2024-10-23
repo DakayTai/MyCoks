@@ -1,5 +1,5 @@
 import socket
-from multiprocessing.dummy import Pool as ThreadPool  # Use ThreadPool from multiprocessing.dummy
+from multiprocessing.dummy import Pool as ThreadPool  # Correct import for ThreadPool
 
 def get_ip_from_domain(domain):
     try:
@@ -12,7 +12,6 @@ def get_ip_from_domain(domain):
 
 def main():
     input_file = input('List Domain: ')  # Input file containing domains
-    output_file = "ips.txt"  # Output file for saving IPs
 
     try:
         with open(input_file, 'r') as file:
@@ -27,12 +26,12 @@ def main():
     pool.join()  # Close and join the threads
 
     try:
-        with open(output_file, 'w') as file:
+        with open('ips.txt', 'w') as file:  # Save only to 'ips.txt'
             for domain, ip in results:
                 file.write(f"{ip}\n")  # Only write the IP address
-        print(f"Results saved in {output_file}")
+        print(f"Results saved in ips.txt")
     except IOError as e:
-        print(f"ERROR: Unable to write to file '{output_file}': {e}")
+        print(f"ERROR: Unable to write to file 'ips.txt': {e}")
 
 if __name__ == "__main__":
     main()
