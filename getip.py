@@ -1,5 +1,5 @@
 import socket
-from concurrent.futures import ThreadPoolExecutor, as_completed  # Ensure this is imported
+from multiprocessing.dummy import Pool as ThreadPool  # Use ThreadPool from multiprocessing.dummy
 
 def get_ip_from_domain(domain):
     try:
@@ -12,7 +12,7 @@ def get_ip_from_domain(domain):
 
 def main():
     input_file = input('List Domain: ')  # Input file containing domains
-    output_file = 'ips.txt'  # Output file for saving IPs
+    output_file = "ips.txt"  # Output file for saving IPs
 
     try:
         with open(input_file, 'r') as file:
@@ -21,12 +21,10 @@ def main():
         print(f"ERROR: File '{input_file}' not found.")
         return
 
-    with ThreadPoolExecutor(max_workers=50) as executor:
-        futures = {executor.submit(get_ip_from_domain, domain): domain for domain in domains}
-        results = []
-        for future in as_completed(futures):
-            domain, ip = future.result()
-            results.append((domain, ip))
+    pool = ThreadPool(50)  # Set up the thread pool with 50 threads
+    results = pool.map(get_ip_from_domain, domains)  # Map the function to the domain list
+    pool.close()
+    pool.join()  # Close and join the threads
 
     try:
         with open(output_file, 'w') as file:
