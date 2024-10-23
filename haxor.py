@@ -2,6 +2,7 @@ import os
 import re
 import requests
 from tqdm import tqdm
+import sys  # Import sys for the exit call
 
 def scrape_website(page_type, total_pages=50):
     print("Save haxor.txt")
@@ -48,7 +49,7 @@ Select the page type to grab:
         scrape_website('special')
     elif choice == '2':
         print("\nYou selected 'Archive' page.")
-        scrape_website('')
+        scrape_website('archive')
     elif choice == '0':
         print("Exiting...")
         sys.exit(0)
